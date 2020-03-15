@@ -2,7 +2,18 @@ const form = document.getElementById('form');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
-const password2 = document.getElementById('password2');
+const confirmPassword = document.getElementById('password2');
+
+inputFields = [username, email, password, confirmPassword];
+
+//Prevent adding spaces
+inputFields.forEach(input =>
+  input.addEventListener('keypress', event => {
+    if (event.keyCode === 32) {
+      event.preventDefault();
+    }
+  })
+);
 
 //Show input error message
 function showError(input, message) {
@@ -76,11 +87,11 @@ function getFieldName(input) {
 //Event Listeners
 form.addEventListener('submit', function(e) {
   e.preventDefault();
-  checkRequired([username, email, password, password2]);
+  checkRequired([username, email, password, confirmPassword]);
   checkLength(username, 3, 15);
   checkLength(password, 6, 25);
   checkEmail(email);
-  checkPasswordsMatch(password, password2);
+  checkPasswordsMatch(password, confirmPassword);
 
   // if (username.value === '') {
   //   showError(username, 'Username is required');
