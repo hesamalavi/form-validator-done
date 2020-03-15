@@ -28,7 +28,14 @@ function isValidEmail(email) {
 //Check required fields
 function checkRequired(inputArr) {
   inputArr.forEach(function(input) {
-    if(input.preventDefau)
+    if (input.value.trim() === '') {
+      showError(
+        input,
+        `${input.id.charAt(0).toUpperCase() + input.id.slice(1)} is required`
+      );
+    } else {
+      showSuccess(input);
+    }
   });
 }
 
